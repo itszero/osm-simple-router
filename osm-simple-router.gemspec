@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = OSMSimpleRouter::VERSION
 
   gem.add_dependency "algorithms", ">= 0.5.0"
-  gem.add_dependency "builder", ">= 3.1.4"
+  gem.add_dependency "builder", "~> 3.0.0"
   gem.add_dependency "georuby", ">= 2.0.0"
   gem.add_dependency "osmlib-base", ">= 0.1.4"
 end
