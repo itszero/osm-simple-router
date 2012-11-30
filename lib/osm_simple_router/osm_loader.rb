@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 
-ENV['OSMLIB_XML_PARSER']='Expat'
 require 'OSM/StreamParser'
 
 module OSMSimpleRouter
