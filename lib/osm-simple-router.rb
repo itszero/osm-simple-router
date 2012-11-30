@@ -1,4 +1,4 @@
-require 'osm-simple-router/version'
+require 'osm_simple_router/version'
 
-require 'osm-simple-router/osm_loader'
-require 'osm-simple-router/osm_router'
+require 'osm_simple_router/osm_loader'
+require 'osm_simple_router/osm_router'
