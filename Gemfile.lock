@@ -1,0 +1,26 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    algorithms (0.5.0)
+    builder (3.1.4)
+    coderay (1.0.8)
+    georuby (2.0.0)
+    method_source (0.8.1)
+    osmlib-base (0.1.4)
+    pry (0.9.10)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    slop (3.3.3)
+    xmlparser (0.7.2.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  algorithms
+  builder
+  georuby
+  osmlib-base
+  pry
+  xmlparser
