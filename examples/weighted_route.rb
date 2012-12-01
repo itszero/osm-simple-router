@@ -42,3 +42,4 @@ status, route, distance = router.route(start, goal) do |start, to, goal|
 end
 cords = route.map { |n| p = n.point; [p.y, p.x] }
 puts "** Route #{status}: #{distance} m, #{route.size} nodes"
+puts cords.map { |n| "#{n[0]}, #{n[1]}" }.join("\n")

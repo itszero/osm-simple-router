@@ -96,6 +96,8 @@ module OSMSimpleRouter
       node_start = @data[:nodes][start]
       node_to = @data[:nodes][to]
       node_goal = @data[:nodes][goal]
+      distance = 0
+      predictionDistance = 0
       if blk.nil?
         distance = node_start.point.euclidian_distance(node_to.point)
         predictionDistance = distance + node_to.point.euclidian_distance(node_goal.point)
