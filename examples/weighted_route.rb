@@ -36,14 +36,9 @@ status, route, distance = router.route(start, goal) do |start, to, goal|
   if grid_name == "3377500x-8439000"
     factor = 100
   end
-  to.point.spherical_distance(goal.point) * factor
+
+  # returns the real distance of (start, to) and prediction of (to, goal)
+  [start.point.euclidian_distance(to.point), to.point.spherical_distance(goal.point) * factor]
 end
 cords = route.map { |n| p = n.point; [p.y, p.x] }
 puts "** Route #{status}: #{distance} m, #{route.size} nodes"
-
-puts "** normal route"
-status, route, distance = router.route(start, goal)
-puts status
-cords2 = route.map { |n| p = n.point; [p.y, p.x] }
-puts "** Route #{status}: #{distance} m, #{route.size} nodes"
-

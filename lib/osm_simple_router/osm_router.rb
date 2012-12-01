@@ -88,7 +88,7 @@ module OSMSimpleRouter
 
     def find_closest_node(point, num=1)
       @data[:nodes].values.sort_by { |node|
-        node.point.spherical_distance(point)
+        node.point.euclidian_distance(point)
       }.take(num)
     end
 
@@ -96,9 +96,12 @@ module OSMSimpleRouter
       node_start = @data[:nodes][start]
       node_to = @data[:nodes][to]
       node_goal = @data[:nodes][goal]
-      distance = node_start.point.spherical_distance(node_to.point)
-      predictionDistance = distance + (blk.nil? ? node_to.point.spherical_distance(node_goal.point) : blk.call(node_start, node_to, node_goal))
-
+      if blk.nil?
+        distance = node_start.point.euclidian_distance(node_to.point)
+        predictionDistance = distance + node_to.point.euclidian_distance(node_goal.point)
+      else
+        distance, predictionDistance = blk.call(node_start, node_to, node_goal)
+      end
       currentDistance = data[:distance]
       queueItem = {
         :distance => currentDistance + distance,
