@@ -39,7 +39,7 @@ module OSMSimpleRouter
       closedSet = []
       queuedSet = []
       @queue = PriorityQueue.new
-      blankQueueItem = { :distance =>0, :nodes => [start.id] }
+      blankQueueItem = { :distance => 0, :nodes => [start.id] }
       @data[:link][start.id].each do |to|
         next if (closedSet.include? to) or (queuedSet.include? to)
         queuedSet << to
