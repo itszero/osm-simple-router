@@ -8,8 +8,11 @@ module OSMSimpleRouter
     include GeoRuby::SimpleFeatures
     include Containers
 
-    def initialize(map, &way_filter)
+    def initialize(map, options={}, &way_filter)
       @data = {}
+      @options = {
+        :nearby_nodes => 3
+      }.merge(options)
 
       init_map(map, way_filter)
       @queue = PriorityQueue.new
@@ -24,8 +27,8 @@ module OSMSimpleRouter
         p2 = Point.from_coordinates(p2)
       end
 
-      starts = find_closest_node(p1, 5)
-      goals = find_closest_node(p2, 5)
+      starts = find_closest_node(p1, @options[:nearby_nodes])
+      goals = find_closest_node(p2, @options[:nearby_nodes])
 
       starts.product(goals) do |start, goal|
         result = route_by_node(start, goal, &blk)
