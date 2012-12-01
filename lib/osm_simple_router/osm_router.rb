@@ -10,7 +10,6 @@ module OSMSimpleRouter
 
     def initialize(map, &way_filter)
       @data = {}
-      puts "** OSMRouter: Initializing router"
 
       init_map(map, way_filter)
       @queue = PriorityQueue.new
@@ -25,7 +24,6 @@ module OSMSimpleRouter
         p2 = Point.from_coordinates(p2)
       end
 
-      puts "** OSMRouter: Start routing from (#{p1.lat}, #{p1.lon}) to (#{p2.lat}, #{p2.lon})"
       starts = find_closest_node(p1, 5)
       goals = find_closest_node(p2, 5)
 
@@ -38,8 +36,6 @@ module OSMSimpleRouter
     end
 
     def route_by_node(start, goal, &blk)
-      puts "** OSMRouter: Start node chosen #{start.inspect}"
-      puts "** OSMRouter: Goal node chosen #{goal.inspect}"
       closedSet = []
       queuedSet = []
       @queue = PriorityQueue.new
@@ -71,7 +67,6 @@ module OSMSimpleRouter
     def init_map(map, way_filter)
       @data[:ways] = way_filter.nil? ? map[:ways].values : map[:ways].values.select { |way| way_filter.call(way) }
       @data[:ways].each { |way| way.nodes.map!(&:to_i) }
-      puts "** OSMRouter: #{@data[:ways].size} ways loaded"
 
       @data[:link] = Hash.new { |h, k| h[k] = [] }
       @data[:nodes] = {}
@@ -89,7 +84,6 @@ module OSMSimpleRouter
       @data[:link].each do |key, value|
         @data[:link][key] = value.uniq
       end
-      puts "** OSMRouter: #{@data[:nodes].size} nodes loaded"
     end
 
     def find_closest_node(point, num=1)
