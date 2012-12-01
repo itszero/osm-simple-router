@@ -68,7 +68,7 @@ module OSMSimpleRouter
       @data[:ways] = way_filter.nil? ? map[:ways].values : map[:ways].values.select { |way| way_filter.call(way) }
       @data[:ways].each { |way| way.nodes.map!(&:to_i) }
 
-      @data[:link] = Hash.new { |h, k| h[k] = [] }
+      @data[:link] = {}
       @data[:nodes] = {}
       @data[:ways].each do |way|
         way.nodes.each do |node_id|
@@ -77,8 +77,8 @@ module OSMSimpleRouter
         way.nodes.each_cons(2) do |from_id, to_id|
           node_from, node_to = @data[:nodes][from_id], @data[:nodes][to_id]
           next if node_from.nil? or node_to.nil?
-          @data[:link][from_id] << to_id
-          @data[:link][to_id] << from_id
+          @data[:link][from_id] << to_id rescue @data[:link][from_id] = [to_id]
+          @data[:link][to_id] << from_id rescue @data[:link][to_id] = [from_id]
         end
       end
       @data[:link].each do |key, value|
