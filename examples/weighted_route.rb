@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'osm_loader'
-require 'osm_router'
+require 'osm-simple-router'
+include OSMSimpleRouter
 require 'geo_ruby'
 include GeoRuby::SimpleFeatures
 require 'json'
